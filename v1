@@ -1,0 +1,165 @@
+import random
+
+run = True
+while run == True:
+
+# stałe
+    HANGMAN = (
+    """
+     ------
+     |    |
+     |
+     |
+     |
+     |
+     |
+     |
+     |
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |
+     |
+     |
+     |
+     |
+     |
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |   -|-
+     | 
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-|-
+     |   
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-|-|
+     |   
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-|-|
+     |    |
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-|-|
+     |    |
+     |    |
+     |   | 
+     |   | 
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-|-|
+     |    |
+     |    |
+     |   | |
+     |   | |
+     |  
+    ----------
+    """)
+
+# maxymalna liczba bledow jest o 1 mniejsza niz liczba rysunkow
+    MAX_WRONG = len(HANGMAN) - 1
+# stala slowa
+    WORDS = ["GRACZ","ZIOM","MARTIN","DUPEK","NADZIEJA","TRAKTORZYSTA"]
+
+    word = random.choice(WORDS) # slowo do odgadniecia 
+
+
+    so_far = "-" * len(word)      # kreska zastępuje nieodgadniętą literę
+
+    wrong = 0 # liczba nietrafionych liter 
+
+    uzyte = [] # slowa juz uzyte w grze
+
+    print("Hello to Hangman. Let's play!")
+
+    while wrong < MAX_WRONG and so_far != word:
+        print(HANGMAN[wrong])
+        print("\n These letters you have used:\n", uzyte)
+        print("\n Word to guess:\n", so_far)
+
+        guess = input("\n Please enter a letter: ")
+        guess = guess.upper()
+    
+        while guess in uzyte:
+            print("You have already tried this letter", guess)
+            guess = input("Please enter a letter: ")
+            guess = guess.upper()
+
+        uzyte.append(guess)
+
+        if guess in word:
+            print(guess, "is in the word!")
+
+        # utwórz nową wersję zmiennej so_far, aby zawierała odgadniętą literę
+            new = ""
+            for i in range(len(word)):
+                if guess == word[i]:
+                    new += guess
+                else:
+                    new += so_far[i]              
+            so_far = new
+        else:
+            print("\n", guess, "is not in word :(")
+            wrong += 1
+
+
+    if wrong == MAX_WRONG:
+        print(HANGMAN[wrong])
+        print("\n You loose!")
+        
+        
+    else:
+        print("\n You win!")
+    
+    print("\n The word is:", word)
+
+    next_game = input("\n\n Do you want to play again (y/n)?")
+    if next_game.lower() == 'n':
+        run = False
+        break
