@@ -1,0 +1,4 @@
+user888 | 2019-07-09 09:20 | Game took: 5.332 seconds | 2 | Tbilisi
+user1 | 2019-07-09 14:17 | Game took: 14.856 seconds | 3 | Pretoria
+user234 | 2019-07-09 14:24 | Game took: 19.076 seconds | 14 | San salvador
+user456 | 2019-07-09 14:24 | Game took: 5.962 seconds | 1 | Kingstown
